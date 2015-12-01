@@ -1,0 +1,217 @@
+---
+title: "Stream C: Introduction to R Programming (BioinfoSummer 2015)"
+author: "Pengyi Yang & Stephen Pederson"
+output: html_document
+---
+
+The R programming language provides an effective environment for making sense of data that enables us to address various biological questions. In this introduction course, we will illustrate exploratory data analysis that involves calculating numerical and graphical summaries. More specially, we will cover installation of R packages, write basic R functions and examine various visualization tools.  For more intermediate participants in the course we will examine more complex visualization tools.
+
+
+## Outline
+- R data types and operations
+- Read data in R and exploratory data analysis
+- Install package and calling functions from packages
+- Write your own functions
+- Generating reports using RStudio
+
+## R data types
+#### Atomic data types and operations
+**Character**
+```{r}
+species <- "mouse"
+```
+**Integer**
+```{r}
+sampleSize <- 6
+```
+**Numeric**
+```{r}
+meanLifeSpan <- 2.05
+```
+**Factor**
+```{r}
+sex <- factor("male")
+```
+**Boolean**
+```{r}
+mammal <- TRUE
+```
+**Concatenate characters**
+```{r}
+strain <- "C57BL/6"
+sampleDetail <- paste(species, strain)
+sampleDetail
+```
+
+
+#### Primitive data types and operations
+**Vectors**
+```{r}
+Groups <- c("treated", "control", "control", "control", "treated", "treated")
+Groups
+lifeSpans <- c(2.1, 1.9, 1.7, 1.8, 2.3, 2.5)
+lifeSpans
+# Calculate mean life span of sample population
+mean(lifeSpans)
+```
+**List**
+```{r}
+# Split samples based on their groups
+sampleByGroup <- split(lifeSpans, Groups)
+sampleByGroup # sampleByGroup is a list
+# access a single element in a list (get the mean of the second group)
+sampleByGroup$treated # access by name using '$'
+sampleByGroup[[2]] # access by index using '[[]]'
+# calculate mean of samples in each group
+means <- lapply(sampleByGroup, mean)
+means
+# calculate standard deviation of samples in each group
+sds <- lapply(sampleByGroup, sd)
+sds
+sds[[2]] # access list by index
+```
+**Matrix**
+```{r}
+# using cbind (column bind) to combine two vectors into a matrix
+mat <- cbind(sampleByGroup$treated, sampleByGroup$control)
+mat
+colnames(mat) <- c("treated", "control") # assign column names
+mat
+rownames(mat) <- paste("sample", 1:nrow(mat)) # assgin row names
+mat
+```
+**Data frame**
+```{r}
+# create a data frame where life spans are stored in the first column and grouping information are stored in the second column
+df <- data.frame(lifeSpans, Groups)
+df
+# convert data frame into a list using function 'split'
+sampleByGroup <- split(df[,1], df[,2])
+sampleByGroup
+# visualise the data using boxplot
+boxplot(sampleByGroup$control, sampleByGroup$treated, ylab="Life span (year)")
+# perform a t-test with respect to life span between the two groups of samples
+g1 <- sampleByGroup$treated
+g2 <- sampleByGroup$control
+t.test(g1, g2, alternative="greater")
+```
+
+
+### Practice 1
+Replicate the t-test result above without using the R built-in function 't.test'.
+
+Definition of two-sample t-test is as follows:
+
+$H_0$: $\mu_1 = \mu_2$
+
+$H_1$: $\mu_1 \neq \mu_2$
+
+Test statistic: 
+
+$T=\frac{\overline{Y}_1 - \overline{Y}_2}{\sqrt{s_1^2/N_1 + s_2^2/N_2}}$
+
+
+
+
+## Reading data in R and exploratory data analysis
+
+#### Read in a tab-delimited dataset from plain text file and calculate summary statistics
+```{r}
+Adipo.dat <- read.delim("Adipogenesis.txt", head=TRUE)
+Adipo.dat[1:5,]
+```
+
+subsetting a matrix
+```{r}
+Adipo.exp <- as.matrix(Adipo.dat[,-1]) # removing the ID column from the raw data to create a numeric matrix containing the expression of the genes at each time point
+rownames(Adipo.exp) <- Adipo.dat[,1] # assign the row names of the matrix as the ID in the first column
+Adipo.exp[1:5,] # displaying the first five rows of the expression matrix
+summary(Adipo.exp)
+```
+
+Read data from R data object
+```{r}
+load("DEGs.RData") # This data contains differentially expressed genes
+# subset the expression matrix to select only DE gene experssions
+Adip.exp.DEGs <- Adipo.exp[DEGs,]
+```
+
+write table
+```{r}
+#write.table(Adip.exp.DEGs, file="Adipogenesis_DE.txt", quote=F, sep="\t")
+#save(Adipo.dat, file="Adipo.RData")
+```
+
+
+#### Exploratory data analysis and visualisation
+boxplot
+```{r}
+par(mfrow=c(1, 2))
+boxplot(Adipo.exp, ylab="log2 Fold Change", main="Full dataset")
+boxplot(Adip.exp.DEGs, ylab="log2 Fold Change", main="DE dataset")
+```
+
+
+```{r}
+par(mfrow=c(1, 2))
+# Scatter plot the full data and highlight the DE genes in the scatter plot
+plot(Adipo.exp[,c("t8h", "t48h")])
+points(Adipo.exp[DEGs,c("t8h", "t48h")], pch="*", col="red", main="8h vs 48h")
+abline(h=0, v=0, col="gold")
+# generating pairwise correlation plots
+plot(Adipo.exp[,c("t4h", "t48h")])
+points(Adipo.exp[DEGs,c("t4h", "t48h")], pch="*", col="red", main="4h vs 48h")
+abline(h=0, v=0, col="gold")
+```
+
+
+
+
+## Install package and calling functions from packages
+Install an R package called 'corrplot' from CRAN (The Comprehensive R Archive Network)
+```{r}
+install.packages("corrplot", repos='http://cran.us.r-project.org')
+library(corrplot)
+#?corrplot
+corrplot(corr=cor(Adip.exp.DEGs, use="na.or.complete"), addCoef.col="red")
+```
+
+
+### Practice 2
+Cluster evaluation R package (clueR) is a package to determine optimal fuzzy k-mean clustering from time-series data. Please following the steps below to analyse and visualise the time-series data from Adipogenesis:
+
+**Step 1:** Install an R package called 'clueR' from CRAN.
+```{r}
+install.packages("ClueR", repos='http://cran.us.r-project.org')
+```
+
+**Step 2:** Run the following two lines of code in R.
+```{r}
+library(ClueR)
+data(Pathways)
+rownames(Adip.exp.DEGs) <- toupper(rownames(Adip.exp.DEGs))
+clueObj <- runClue(Tc=Adip.exp.DEGs, annotation=Pathways.KEGG, rep = 5, kRange=20)
+```
+
+**Step 3:** clueObj is a list that contains various evaluation information and statistics. clueObj$evlMat is the evaluation matrix that contains the clustering goodness from k=2 to k=20. Calculate means and standard deviations with respect to each column of this matrix.
+
+**Step 4:** Install an R package called 'Hmisc', plot means calculated in step 3, and add standard deviations as error bar using function 'errbar' from 'Hmisc'.
+```{r}
+Ms <- apply(clueObj$evlMat, 2, mean, na.rm=TRUE)
+Ss <- apply(clueObj$evlMat, 2, sd, na.rm=TRUE)
+library(Hmisc)
+errbar(1:length(Ms), Ms, Ms+Ss, Ms-Ss, cex=1.2, type="b", xaxt="n", xlab="k", ylab="E")
+axis(1, at=1:12, labels=paste("k=", 2:13, sep=""))
+```
+
+**Step 5:** Run the following code to obtain optimal clustering result determined by clueR
+```{r}
+# generate the optimal clustering results
+ best <- clustOptimal(clueObj, rep=10, mfrow=c(4, 4))
+# list enriched clusters
+ best$enrichList
+```
+
+
+
+
