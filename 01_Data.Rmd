@@ -82,11 +82,13 @@ __When would you need an integer rather than a double?__
 ## Vectors
 R sees everything as a _vector_
 These are like columns in a spreadsheet, where we have entries in multiple cells.
+Importantly, _every entry must be of the same data type_!
 ```{r}
 lifeSpans <- c(2.1, 1.9, 1.7, 1.8, 2.3, 2.5)
 lifeSpans
 ```
-This is a _numeric_ vector.
+This is a _numeric_ vector, where all entries are double precision entries (i.e. they have decimal points).  
+**What would happen if we accidentally included the letter "a" in this vector?**
 
 We can perform simple operations on a vector by using some in-built functions.
 ```{r}

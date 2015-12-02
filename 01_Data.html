@@ -125,11 +125,11 @@ x</code></pre>
 </div>
 <div id="vectors" class="section level2">
 <h2>Vectors</h2>
-<p>R sees everything as a <em>vector</em> These are like columns in a spreadsheet, where we have entries in multiple cells.</p>
+<p>R sees everything as a <em>vector</em> These are like columns in a spreadsheet, where we have entries in multiple cells. Importantly, <em>every entry must be of the same data type</em>!</p>
 <pre class="r"><code>lifeSpans &lt;- c(2.1, 1.9, 1.7, 1.8, 2.3, 2.5)
 lifeSpans</code></pre>
 <pre><code>## [1] 2.1 1.9 1.7 1.8 2.3 2.5</code></pre>
-<p>This is a <em>numeric</em> vector.</p>
+<p>This is a <em>numeric</em> vector, where all entries are double precision entries (i.e. they have decimal points).<br /><strong>What would happen if we accidentally included the letter “a” in this vector?</strong></p>
 <p>We can perform simple operations on a vector by using some in-built functions.</p>
 <pre class="r"><code>meanLifeSpan &lt;- mean(lifeSpans)
 meanLifeSpan</code></pre>
