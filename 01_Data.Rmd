@@ -1,0 +1,132 @@
+---
+title: "01 DataTypes"
+author: "Pengyi Yang & Stephen Pederson"
+output: html_document
+---
+
+## Why use R?
+R offers numerous advantages over Excel, GraphPad Prism & the like:  
+
+- Can handle extremely large datasets  
+- Complex processes come as inbuilt functions  
+- _We have code to record and repeat our analysis_
+  
+>With power comes great responsibility - Uncle Ben
+  
+We need to understand a little about:  
+
+- Data Types  
+- Data Structures  
+- Functions  
+
+We will also briefly touch on:  
+
+- Reading data into R
+- Visualising Data
+- The package _clueR_
+
+## The R Environment
+In the R Environment, we can create objects of multiple types.
+We usually give them a name, and they are only visible when we enter the object name in the _Console_.
+```{r}
+x <- 5
+x
+```
+
+It's like a desk (or Workspace) where we can leave things out of view until we need them.
+In RStudio, the _Environment_ tab in the top right shows what's currently in our Environment.  
+![The Environment Tab](figure/EnvironmentTab.png)
+
+Nothing is saved to disk, until we save the complete Environment as an _.RData_ object.
+
+
+## Data Types
+
+**What is the difference between these two?**
+
+- 7
+- "7"  
+
+The first represents the value 7, whilst the second is the character that we use to represent this in text.
+To your computer these mean different things!
+
+Excel will automatically try to convert "7" to the value 7, but automatic conversion can be troublesome.
+(Try entering the gene names for SEPT9, DEC1, FEB2 etc. into Excel.)
+In R we maintain control over this delineation.
+
+## The Basic Data Types
+The basic data types in R are:
+
+logical (TRUE or FALSE)
+```{r}
+x > 1
+```
+
+integer
+```{r}
+sampleSize <- 6
+```
+
+double (also known as "numeric")
+```{r}
+meanLifeSpan <- 2.05
+```
+
+character
+```{r}
+species <- "mouse"
+```
+
+__When would you need an integer rather than a double?__
+
+## Vectors
+R sees everything as a _vector_
+These are like columns in a spreadsheet, where we have entries in multiple cells.
+```{r}
+lifeSpans <- c(2.1, 1.9, 1.7, 1.8, 2.3, 2.5)
+lifeSpans
+```
+This is a _numeric_ vector.
+
+We can perform simple operations on a vector by using some in-built functions.
+```{r}
+meanLifeSpan <- mean(lifeSpans)
+meanLifeSpan
+```
+
+**Try some other functions**  
+Some examples may be sd(), var(), max(), min(), median(), summary()
+
+**Could we apply these functions to integer vectors?**  
+**What about character vectors?**
+
+Every vector also has a length attribute, which is just the number of entries in the vector.
+```{r}
+sampleSize <- length(lifeSpans)
+sampleSize
+```
+
+## Subsetting Vectors
+We can extract single values, or sets of values, from a vector by using square brackets
+```{r}
+lifeSpans[1]
+lifeSpans[4:6]
+```
+
+
+## Factors
+One other data type we see in R is a _factor_.
+R will sometimes assume that any character strings represent categorical variables.
+```{r}
+Groups <- c("treated", "control", "control", "control", "treated", "treated")
+Groups <- factor(Groups)
+Groups
+```
+
+These can be a trap for the unwary, as behind the scenes R has saved these as the integers, corresponding to which category (_or factor level_) the values belong to.
+```{r}
+as.integer(Groups)
+```
+In one sense, these are like a hybrid of an integer vector, with a character vector included which contains the various category names.
+In the old days of puny computers, this was more memory efficient.
+It also makes sense when you consider statistical modelling is the heart of R.
