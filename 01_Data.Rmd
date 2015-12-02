@@ -129,4 +129,4 @@ as.integer(Groups)
 ```
 In one sense, these are like a hybrid of an integer vector, with a character vector included which contains the various category names.
 In the old days of puny computers, this was more memory efficient.
-It also makes sense when you consider statistical modelling is the heart of R.
+It also makes sense when you consider statistical modelling is at the heart of R.
