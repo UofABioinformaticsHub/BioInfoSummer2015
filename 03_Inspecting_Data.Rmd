@@ -1,0 +1,60 @@
+---
+title: "Inspecting Data"
+author: "Steve Pederson"
+date: "5 December 2015"
+output: html_document
+---
+
+## Inspecting Data
+
+Once we have our data loaded into R, the first thing we should do is check that it looks right.
+
+The `toothData` file contains data about the effects of Vitamin C on tooth growth in Guinea Pigs, using two delivery methods, and three dose levels.
+
+```{r}
+toothData <- read.csv("data/toothData.csv")
+head(toothData)
+summary(toothData)
+nrow(toothData)
+```
+
+## Plotting the data
+
+*R* makes visually inspecting the data super-easy, and in particular, the package `ggplot2` has some powerful plotting functions.
+If you don't have this package already installed, you can simply install this using the following commands.
+This is the simple method for installing packages from the main *R* package repository, known as [CRAN](https://cran.r-project.org/).
+A package, is essentially a collection of functions for a some type of analysis.
+
+```{r, eval=FALSE}
+install.packages("ggplot2")
+```
+
+To then load the functions that ggplot2 contains, we load the entire `library` of functions using.
+
+```{r}
+library("ggplot2")
+```
+
+```{r}
+ggplot(toothData, aes(x = dose, y = len, fill = supp)) +
+  geom_boxplot()
+```
+
+These need re-ordering...
+
+```{r}
+ggplot(toothData, aes(x = len)) +
+  geom_histogram()
+```
+
+```{r}
+ggplot(toothData, aes(x = len, fill = supp)) +
+  geom_density(alpha = 0.5)
+```
+
+
+```{r}
+ggplot(toothData, aes(x = len, fill = supp)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~dose)
+```
