@@ -8,12 +8,13 @@ output: html_document
 R offers numerous advantages over Excel, GraphPad Prism & the like:  
 
 - Can handle extremely large datasets  
-- Complex processes come as inbuilt functions  
+- We can perform complex analytic precedures
+- Many processes come as inbuilt functions  
 - _We have code to record and repeat our analysis_
   
->With power comes great responsibility - Uncle Ben
+>"With power comes great responsibility" - Uncle Ben
   
-We need to understand a little about:  
+With this extra capability, we need to understand a little about:  
 
 - Data Types  
 - Data Structures  
@@ -27,7 +28,9 @@ We will also briefly touch on:
 
 ## The R Environment
 In the R Environment, we can create objects of multiple types.
-We usually give them a name, and they are only visible when we enter the object name in the _Console_.
+We first give them a name (e.g. `x`) and then assign a value to it using the `<-`symbol.
+This is like an arrow putting the value into the object.
+*R* objects are only visible when we enter the object name in the _Console_.
 ```{r}
 x <- 5
 x
@@ -91,9 +94,10 @@ This is a _numeric_ vector, where all entries are double precision entries (i.e.
 **What would happen if we accidentally included the letter "a" in this vector?**
 
 We can perform simple operations on a vector by using some in-built functions.
+Functions in R, consist of their name, followed by the round braces `()`.
+We pass an *R* object to the function, by including it inside these braces.
 ```{r}
-meanLifeSpan <- mean(lifeSpans)
-meanLifeSpan
+mean(lifeSpans)
 ```
 
 **Try some other functions**  
@@ -102,7 +106,9 @@ Some examples may be sd(), var(), max(), min(), median(), summary()
 **Could we apply these functions to integer vectors?**  
 **What about character vectors?**
 
-Every vector also has a length attribute, which is just the number of entries in the vector.
+In the above, we just printed the reults to the screen.
+Sometimes we may want to save the results as a new *R* object.
+For example, every vector also has a length attribute, which is just the number of entries in the vector, and this can be how we find out our sample size.
 ```{r}
 sampleSize <- length(lifeSpans)
 sampleSize
@@ -132,3 +138,34 @@ as.integer(Groups)
 In one sense, these are like a hybrid of an integer vector, with a character vector included which contains the various category names.
 In the old days of puny computers, this was more memory efficient.
 It also makes sense when you consider statistical modelling is at the heart of R.
+
+## Data Frames
+One of the most common data structures in R is a `data.frame`.
+These are very similar to a spreadsheet in Excel, and we have columns with information in them.
+*Each column must be the same length!*
+```{r}
+mouseLife <- data.frame(lifeSpans, Groups)
+mouseLife
+```
+
+Note how R automatically named the columns.
+We could also specify these manually.
+ 
+```{r}
+mouseLife <- data.frame(lifeSpans, Groups,
+                        sex  = c("M", "M", "M", "F", "F", "F"))
+mouseLife
+```
+
+We can easily subset a `data.frame` based on values in a column.
+
+```{r}
+subset(mouseLife, sex =="M")
+```
+
+We can also call a column individually, using the `$` symbol followed by the column name.
+
+```{r}
+mouseLife$Groups
+```
+
