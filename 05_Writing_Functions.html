@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
-<meta name="author" content="Steve Pederson" />
+<meta name="author" content="Steve Pederson &amp; Pengyi Yang" />
 
 
 <title>Writing Functions</title>
@@ -62,7 +62,7 @@ img {
 
 <div id="header">
 <h1 class="title">Writing Functions</h1>
-<h4 class="author"><em>Steve Pederson</em></h4>
+<h4 class="author"><em>Steve Pederson &amp; Pengyi Yang</em></h4>
 <h4 class="date"><em>6 December 2015</em></h4>
 </div>
 
@@ -89,26 +89,11 @@ img {
 }</code></pre>
 <p>The functions needs:</p>
 <ol style="list-style-type: decimal">
-<li>A <code>name</code> so we can ‘call’ it</li>
-<li>An <code>argument</code> (or input) to ‘do something’ to.<br /> Known in <em>R</em> world as the <code>formals</code></li>
+<li>A <code>name</code> so we can ‘call’ it, and guess what the function does</li>
+<li>An <code>argument</code> (or input) to ‘do something’ to.<br /></li>
 <li>A <code>body</code> which is the code that runs when we call the function</li>
 </ol>
-</div>
-<div id="our-first-function-1" class="section level2">
-<h2>Our first function</h2>
-<pre class="r"><code>myMean &lt;- function(x){
-  n &lt;- length(x)
-  total &lt;- sum(x)
-  return(total / n)
-}</code></pre>
-<p><strong>NB</strong></p>
-<ul>
-<li><p><code>x</code> is just a place holder for “some R object”</p></li>
-<li><p>This object then becomes called <code>x</code> as far as the function is concerned</p></li>
-</ul>
-</div>
-<div id="our-first-function-2" class="section level2">
-<h2>Our first function</h2>
+<p>As mentioned previously : <code>x</code> is just a place holder for “some R object” : This object then becomes called <code>x</code> as far as the function is concerned</p>
 <p>Let’s run it:</p>
 <pre class="r"><code>y &lt;- c(1, 16, 2, 9)
 myMean(y)</code></pre>
@@ -117,13 +102,9 @@ myMean(y)</code></pre>
 <pre class="r"><code>mean(y)</code></pre>
 <pre><code>## [1] 7</code></pre>
 <p><strong>NB:</strong> We didn’t need to write <code>myMean(x = y)</code></p>
-</div>
-<div id="our-first-function-3" class="section level2">
-<h2>Our first function</h2>
-<p>To learn about a function, we can see what arguments are required</p>
+<p>Just like any other <em>R</em> function we can find what the arguments are, and what the code is:</p>
 <pre class="r"><code>formals(myMean)</code></pre>
 <pre><code>## $x</code></pre>
-<p>We can inspect the code</p>
 <pre class="r"><code>body(myMean)</code></pre>
 <pre><code>## {
 ##     n &lt;- length(x)
@@ -131,18 +112,9 @@ myMean(y)</code></pre>
 ##     return(total/n)
 ## }</code></pre>
 </div>
-<div id="help-pages" class="section level2">
-<h2>Help pages</h2>
-<p>We can read the help page (if one exists)</p>
-<pre class="r"><code>?median
-?sd
-?mean</code></pre>
-<p>A well written help page is amazing</p>
-<p>(These can be rare for beginners in R)</p>
-</div>
 <div id="writing-functions-for-not-you" class="section level2">
 <h2>Writing functions for NOT you</h2>
-<p>(I mean you in 6 months, when you have no idea what you did)</p>
+<p>(I mean you in 6 months, when you have no idea what you did and you think you’re an idiot)</p>
 <p>We can place comments in the code</p>
 <pre class="r"><code>myMean &lt;- function(x){
   
@@ -156,10 +128,11 @@ myMean(y)</code></pre>
   total / n
   
 }</code></pre>
-</div>
-<div id="writing-functions-for-not-you-1" class="section level2">
-<h2>Writing functions for NOT you</h2>
-<p>Notice that these comments are not shown when we call <code>body()</code></p>
+<p>Notice that</p>
+<ol style="list-style-type: decimal">
+<li>any comments are not shown when we call <code>body()</code></li>
+<li>We didn’t include the <code>return()</code> command. Functions in <em>R</em> will output the final line of code, regardless of whether we include this command.</li>
+</ol>
 <pre class="r"><code>body(myMean)</code></pre>
 <pre><code>## {
 ##     n &lt;- length(x)
@@ -171,9 +144,6 @@ myMean(y)</code></pre>
 <div id="what-could-possibly-go-wrong" class="section level2">
 <h2>What could possibly go wrong?</h2>
 <p>Now we know how to write function that works:<br /><strong>How could this ever go wrong?</strong></p>
-</div>
-<div id="what-could-possibly-go-wrong-1" class="section level2">
-<h2>What could possibly go wrong?</h2>
 <p>Some ways to break <code>myMean</code> are:</p>
 <ol style="list-style-type: decimal">
 <li>Give it <code>NA</code> values</li>
@@ -193,9 +163,6 @@ myMean(ohNo)</code></pre>
 <li><strong>to an R Environment INSIDE the function</strong></li>
 </ul></li>
 </ul>
-</div>
-<div id="debugging-1" class="section level2">
-<h2>Debugging!</h2>
 <pre class="r"><code>myMean &lt;- function(x){
   
   browser()
@@ -210,19 +177,10 @@ myMean(ohNo)</code></pre>
   total / n
   
 }</code></pre>
-</div>
-<div id="debugging-2" class="section level2">
-<h2>Debugging!</h2>
 <p>Now let’s call the function, and a new window will open</p>
 <p>You’ll also see some new buttons at the top of the R Console</p>
 <pre class="r"><code>myMean(ohNo)</code></pre>
-<p>Turn to the <code>Environment</code> Tab at the top right of R Studio</p>
-<ul>
-<li>This is displaying the internals of the function</li>
-</ul>
-</div>
-<div id="debugging-3" class="section level2">
-<h2>Debugging!</h2>
+<p>Turn to the <code>Environment</code> Tab at the top right of R Studio. This is displaying the internal environment of the function</p>
 <p>Send the first line in the <code>Source Viewer</code> Window to the Console</p>
 <ul>
 <li><p><code>n</code> will appear in the <code>Environment</code> Tab (and so will <code>x</code>)</p></li>
@@ -233,41 +191,38 @@ myMean(ohNo)</code></pre>
 <li>The value for <code>total</code> is not what we expected, so we need to fix this line!</li>
 </ul>
 <p><strong>Suggestions?</strong></p>
+<p>Let’s check the help page to see if there is a clue here as to how we can fix our function.</p>
 <pre class="r"><code>?sum</code></pre>
-</div>
-<div id="debugging-4" class="section level2">
-<h2>Debugging!</h2>
+<p>A solution might be to use the <code>na.rm = TRUE</code> option for the function <code>sum()</code></p>
 <pre class="r"><code>myMean &lt;- function(x){
   
   browser()
   
-  # Find the values which are not NA
-  notNA &lt;- which(!is.na(x))
-  
-  # Find how many valid values there are
-  n &lt;- length(x[notNA])
+  # First, count how many values are in x
+  n &lt;- length(x)
   
   # Now add the valid numbers
-  total &lt;- sum(x[notNA])
+  total &lt;- sum(x, na.rm = TRUE)
   
   # And produce some nice output
   total / n
   
 }</code></pre>
-</div>
-<div id="debugging-5" class="section level2">
-<h2>Debugging!</h2>
-<p>My final function would look something like this:</p>
+<p>However, this still wouldn’t work as we’ve still included the <code>NA</code> values when we counted them. My final function would look something like this:</p>
 <pre class="r"><code>myMean &lt;- function(x){
   
   # Check the vector is numeric
   stopifnot(is.numeric(x))
   
+  # Remove any NA values
+  isNA &lt;- is.na(x)
+  x &lt;- x[!isNA]
+  
   # Count the valid values
-  n &lt;- sum(!is.na(x))
+  n &lt;- sum(x)
   
   # Add the valid values
-  total &lt;- sum(x, na.rm = TRUE)
+  total &lt;- sum(x)
   
   # And now provide some output
   total / n

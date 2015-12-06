@@ -1,6 +1,6 @@
 ---
 title: "Introducing Functions"
-author: "Steve Pederson"
+author: "Steve Pederson & Pengyi Yang"
 date: "7 December 2015"
 output: html_document
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Writing Functions"
-author: "Steve Pederson"
+author: "Steve Pederson & Pengyi Yang"
 date: "6 December 2015"
 output: html_document
 ---
@@ -28,28 +28,14 @@ myMean <- function(x){
 
 The functions needs:
 
-1. A `name` so we can 'call' it
+1. A `name` so we can 'call' it, and guess what the function does
 2. An `argument` (or input) to 'do something' to.  
-   Known in *R* world as the `formals`
 3. A `body` which is the code that runs when we call the function
 
-## Our first function
 
-```{r}
-myMean <- function(x){
-  n <- length(x)
-  total <- sum(x)
-  return(total / n)
-}
-```
-
-**NB**
-
-- `x` is just a place holder for "some R object"
-
-- This object then becomes called `x` as far as the function is concerned
-
-## Our first function
+As mentioned previously
+ : `x` is just a place holder for "some R object"
+ : This object then becomes called `x` as far as the function is concerned
 
 Let's run it:
 
@@ -66,34 +52,16 @@ mean(y)
 
 **NB:** We didn't need to write `myMean(x = y)`
 
-## Our first function
-
-To learn about a function, we can see what arguments are required
+Just like any other *R* function we can find what the arguments are, and what the code is:
 ```{r}
 formals(myMean)
-```
-
-We can inspect the code
-```{r}
 body(myMean)
 ```
 
-## Help pages
-
-We can read the help page (if one exists)
-```{r, eval=FALSE}
-?median
-?sd
-?mean
-```
-
-A well written help page is amazing
-
-(These can be rare for beginners in R)
 
 ## Writing functions for NOT you
 
-(I mean you in 6 months, when you have no idea what you did)
+(I mean you in 6 months, when you have no idea what you did and you think you're an idiot)
 
 We can place comments in the code
 
@@ -112,9 +80,11 @@ myMean <- function(x){
 }
 ```
 
-## Writing functions for NOT you
 
-Notice that these comments are not shown when we call `body()`
+Notice that
+
+1. any comments are not shown when we call `body()`
+2. We didn't include the `return()` command. Functions in *R* will output the final line of code, regardless of whether we include this command.
 
 ```{r}
 body(myMean)
@@ -126,8 +96,6 @@ Comments are a great idea for new to intermediate *R* users!
 
 Now we know how to write function that works:  
 **How could this ever go wrong?**
-
-## What could possibly go wrong?
 
 Some ways to break `myMean` are:
 
@@ -154,7 +122,6 @@ myMean(ohNo)
     + **from the Global R Environment**  
     + **to an R Environment INSIDE the function**
 
-## Debugging!
 
 ```{r}
 myMean <- function(x){
@@ -173,8 +140,6 @@ myMean <- function(x){
 }
 ```
 
-## Debugging!
-
 Now let's call the function, and a new window will open
 
 You'll also see some new buttons at the top of the R Console
@@ -183,11 +148,8 @@ You'll also see some new buttons at the top of the R Console
 myMean(ohNo)
 ```
 
-Turn to the `Environment` Tab at the top right of R Studio
-
-- This is displaying the internals of the function
-
-## Debugging!
+Turn to the `Environment` Tab at the top right of R Studio.
+This is displaying the internal environment of the function
 
 Send the first line in the `Source Viewer` Window to the Console
 
@@ -201,25 +163,24 @@ Now, send the second line to the Console
 
 **Suggestions?**
 
+Let's check the help page to see if there is a clue here as to how we can fix our function.
+
 ```{r, eval=FALSE}
 ?sum
 ```
 
-## Debugging!
+A solution might be to use the `na.rm = TRUE` option for the function `sum()`
 
 ```{r}
 myMean <- function(x){
   
   browser()
   
-  # Find the values which are not NA
-  notNA <- which(!is.na(x))
-  
-  # Find how many valid values there are
-  n <- length(x[notNA])
+  # First, count how many values are in x
+  n <- length(x)
   
   # Now add the valid numbers
-  total <- sum(x[notNA])
+  total <- sum(x, na.rm = TRUE)
   
   # And produce some nice output
   total / n
@@ -227,8 +188,7 @@ myMean <- function(x){
 }
 ```
 
-## Debugging!
-
+However, this still wouldn't work as we've still included the `NA` values when we counted them.
 My final function would look something like this:
 ```{r}
 myMean <- function(x){
@@ -236,11 +196,15 @@ myMean <- function(x){
   # Check the vector is numeric
   stopifnot(is.numeric(x))
   
+  # Remove any NA values
+  isNA <- is.na(x)
+  x <- x[!isNA]
+  
   # Count the valid values
-  n <- sum(!is.na(x))
+  n <- sum(x)
   
   # Add the valid values
-  total <- sum(x, na.rm = TRUE)
+  total <- sum(x)
   
   # And now provide some output
   total / n
