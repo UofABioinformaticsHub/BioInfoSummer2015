@@ -1,0 +1,109 @@
+---
+title: "The R Package clueR"
+author: "Pengyi Yang & Steve Pederson"
+date: "7 December 2015"
+output: html_document
+---
+
+## Reading data in R and exploratory data analysis
+
+#### Read in a tab-delimited dataset from plain text file and calculate summary statistics
+```{r}
+Adipo.dat <- read.delim("data/Adipogenesis.txt", head=TRUE)
+Adipo.dat[1:5,]
+```
+
+subsetting a matrix
+```{r}
+Adipo.exp <- as.matrix(Adipo.dat[,-1]) # removing the ID column from the raw data to create a numeric matrix containing the expression of the genes at each time point
+rownames(Adipo.exp) <- Adipo.dat[,1] # assign the row names of the matrix as the ID in the first column
+Adipo.exp[1:5,] # displaying the first five rows of the expression matrix
+summary(Adipo.exp)
+```
+
+Read data from R data object
+```{r}
+load("data/DEGs.RData") # This data contains differentially expressed genes
+# subset the expression matrix to select only DE gene experssions
+Adip.exp.DEGs <- Adipo.exp[DEGs,]
+```
+
+write table
+```{r}
+#write.table(Adip.exp.DEGs, file="Adipogenesis_DE.txt", quote=F, sep="\t")
+#save(Adipo.dat, file="Adipo.RData")
+```
+
+
+#### Exploratory data analysis and visualisation
+boxplot
+```{r}
+par(mfrow=c(1, 2))
+boxplot(Adipo.exp, ylab="log2 Fold Change", main="Full dataset")
+boxplot(Adip.exp.DEGs, ylab="log2 Fold Change", main="DE dataset")
+```
+
+
+```{r}
+par(mfrow=c(1, 2))
+# Scatter plot the full data and highlight the DE genes in the scatter plot
+plot(Adipo.exp[,c("t8h", "t48h")])
+points(Adipo.exp[DEGs,c("t8h", "t48h")], pch="*", col="red", main="8h vs 48h")
+abline(h=0, v=0, col="gold")
+# generating pairwise correlation plots
+plot(Adipo.exp[,c("t4h", "t48h")])
+points(Adipo.exp[DEGs,c("t4h", "t48h")], pch="*", col="red", main="4h vs 48h")
+abline(h=0, v=0, col="gold")
+```
+
+
+
+
+## Install package and calling functions from packages
+Install an R package called 'corrplot' from CRAN (The Comprehensive R Archive Network)
+```{r}
+install.packages("corrplot", repos='http://cran.us.r-project.org')
+library(corrplot)
+#?corrplot
+corrplot(corr=cor(Adip.exp.DEGs, use="na.or.complete"), addCoef.col="red")
+```
+
+
+### Practice 2
+Cluster evaluation R package (clueR) is a package to determine optimal fuzzy k-mean clustering from time-series data. Please following the steps below to analyse and visualise the time-series data from Adipogenesis:
+
+**Step 1:** Install an R package called 'clueR' from CRAN.
+```{r}
+install.packages("ClueR", repos='http://cran.us.r-project.org')
+```
+
+**Step 2:** Run the following two lines of code in R.
+```{r}
+library(ClueR)
+data(Pathways)
+rownames(Adip.exp.DEGs) <- toupper(rownames(Adip.exp.DEGs))
+clueObj <- runClue(Tc=Adip.exp.DEGs, annotation=Pathways.KEGG, rep = 5, kRange=20)
+```
+
+**Step 3:** clueObj is a list that contains various evaluation information and statistics. clueObj$evlMat is the evaluation matrix that contains the clustering goodness from k=2 to k=20. Calculate means and standard deviations with respect to each column of this matrix.
+
+**Step 4:** Install an R package called 'Hmisc', plot means calculated in step 3, and add standard deviations as error bar using function 'errbar' from 'Hmisc'.
+```{r}
+Ms <- apply(clueObj$evlMat, 2, mean, na.rm=TRUE)
+Ss <- apply(clueObj$evlMat, 2, sd, na.rm=TRUE)
+library(Hmisc)
+errbar(1:length(Ms), Ms, Ms+Ss, Ms-Ss, cex=1.2, type="b", xaxt="n", xlab="k", ylab="E")
+axis(1, at=1:12, labels=paste("k=", 2:13, sep=""))
+```
+
+**Step 5:** Run the following code to obtain optimal clustering result determined by clueR
+```{r}
+# generate the optimal clustering results
+ best <- clustOptimal(clueObj, rep=10, mfrow=c(4, 4))
+# list enriched clusters
+ best$enrichList
+```
+
+
+
+
