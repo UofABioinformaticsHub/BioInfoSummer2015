@@ -10,6 +10,9 @@ output: html_document
 Once we have our data loaded into R, the first thing we should do is check that it looks right.
 
 The `toothData` file actually contains data about the effects of Vitamin C on tooth growth in Guinea Pigs, using two delivery methods, and three dose levels.
+The main variable of interest is the length of the teeth, contained in the column `len`.
+The delivery was done using two different types of Vitamin C supplements, and these are detailed in the `supp` column.
+The dose levels contained in each supplement are then recorded in the column `dose`, and these represent levels of 0.5, 1 and 2.0mg.
 
 ```{r, echo=FALSE}
 toothData <- read.csv("data/toothData.csv", stringsAsFactors=FALSE)
@@ -25,7 +28,7 @@ nrow(toothData)
 
 ## Plotting the data using ggplot2
 
-*R* makes visually inspecting the data super-easy, and in particular, the package `ggplot2` has some powerful plotting functions.
+*R* makes visually inspecting the data a relatively straight-forward task, and in particular, the package `ggplot2` has some powerful plotting functions.
 If you don't have this package already installed, you can simply install this using the following command:
 
 ```{r, eval=FALSE}
@@ -41,12 +44,12 @@ To then load the functions that ggplot2 contains, we load the entire `library` o
 library("ggplot2")
 ```
 
-`ggplot2` works in a slightly unusual way, in that we build up layers (or lines) of code, which can give us enormous power & felxibility in the way we plot our data.
-In the first line, we specifiy the *R* object (e.g. toothData) that we are plotting, and then we specify which value goes on which axis, as part of the plotting aesthetics (`aes()`).
-In the following line, we will plot the dose levels on the x-axis, and the tooth length on the y axis.
+`ggplot2` works in a slightly unusual way for an *R* package, in that we build up layers (or lines) of code, which can give us enormous power & flexibility in the way we plot our data.
+In the first line, we specify the *R* object (e.g. toothData) that we are plotting, and then we specify which value goes on which axis, as part of the plotting aesthetics (`aes()`).
+In the following lines, we will plot the dose levels on the x-axis, and the tooth length on the y axis.
 
-By adding the `+` at the end of the line, we are telling *R* that there is another line of code to come, and this is where we add the plotting "geometry".
-Here, the gemoetry we are choosing is a boxplot and as this is our last layer, we don't need the `+` at the end of this line.
+By adding the `+` at the end of the first line, we are telling *R* that there is another line of code to come, and this is where we add the plotting "geometry".
+Here, the geometry we are choosing is a boxplot and as this is our last layer, we don't need the `+` at the end of this line.
 
 ```{r}
 ggplot(toothData, aes(x = dose, y = len)) +
@@ -63,10 +66,10 @@ ggplot(toothData, aes(x = dose, y = len, fill = supp)) +
 
 There are four options we can set for the plotting aesthetics:
 
-1. x: the column to be displayed on the x-axis
-2. y: the column to be displayed on the y-axis
-3. fill: the column to be used to fill the shapes we are using to plot.
-4. colour: the column to be used to change the outline of the shapes.
+1. `x`: the column to be displayed on the x-axis
+2. `y`: the column to be displayed on the y-axis
+3. `fill`: the column to be used to fill the shapes we are using to plot.
+4. `colour`: the column to be used to change the outline of the shapes.
 
 There are also many different types of plot geometry we can easily generate using ggplot.
 Instead of boxplots, we could have plotted the raw data points, using the supplement method as the colour:
@@ -78,13 +81,20 @@ ggplot(toothData, aes(x = dose, y = len, colour = supp)) +
 
 In the next example, we are looking at the general distribution of the entire dataset as a histogram.
 
-```{r}
+```{r, message=FALSE}
 ggplot(toothData, aes(x = len)) +
   geom_histogram()
 ```
 
 Instead of a histogram, we could also plot a smoothed density.
-The additional parameter being passed to the density, controls the transparency of each colour used to shade each density.
+
+```{r, message=FALSE}
+ggplot(toothData, aes(x = len)) +
+  geom_density()
+```
+
+We could also plot the densities for each Vitamin C supplement method.
+The additional parameter being passed to the density here, controls the transparency of the colours used to shade each density.
 
 ```{r}
 ggplot(toothData, aes(x = len, fill = supp)) +
@@ -101,7 +111,7 @@ ggplot(toothData, aes(x = len, fill = supp)) +
   facet_wrap(~dose)
 ```
 
-We can produce very detailed plots using multiple lines of code, which we don't have enough time to fully explore today.
+We can produce very detailed plots using multiple lines of code, which unfortunately we don't have enough time to fully explore today.
 ```{r}
 ggplot(toothData, aes(x = dose, y = len, fill = supp)) +
   geom_boxplot() +
