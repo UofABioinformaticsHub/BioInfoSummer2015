@@ -9,52 +9,106 @@ output: html_document
 
 Once we have our data loaded into R, the first thing we should do is check that it looks right.
 
-The `toothData` file contains data about the effects of Vitamin C on tooth growth in Guinea Pigs, using two delivery methods, and three dose levels.
+The `toothData` file actually contains data about the effects of Vitamin C on tooth growth in Guinea Pigs, using two delivery methods, and three dose levels.
+
+```{r, echo=FALSE}
+toothData <- read.csv("data/toothData.csv", stringsAsFactors=FALSE)
+toothData$supp <- as.factor(toothData$supp)
+toothData$dose <- factor(toothData$dose, levels=c("Low", "Med", "High"))
+```
 
 ```{r}
-toothData <- read.csv("data/toothData.csv")
 head(toothData)
 summary(toothData)
 nrow(toothData)
 ```
 
-## Plotting the data
+## Plotting the data using ggplot2
 
 *R* makes visually inspecting the data super-easy, and in particular, the package `ggplot2` has some powerful plotting functions.
-If you don't have this package already installed, you can simply install this using the following commands.
-This is the simple method for installing packages from the main *R* package repository, known as [CRAN](https://cran.r-project.org/).
-A package, is essentially a collection of functions for a some type of analysis.
+If you don't have this package already installed, you can simply install this using the following command:
 
 ```{r, eval=FALSE}
 install.packages("ggplot2")
 ```
 
-To then load the functions that ggplot2 contains, we load the entire `library` of functions using.
+
+This is the simple method for installing packages from the main *R* package repository, known as [CRAN](https://cran.r-project.org/).
+A package, is essentially a collection of functions for some type of analysis.
+To then load the functions that ggplot2 contains, we load the entire `library` of functions using:
 
 ```{r}
 library("ggplot2")
 ```
+
+`ggplot2` works in a slightly unusual way, in that we build up layers (or lines) of code, which can give us enormous power & felxibility in the way we plot our data.
+In the first line, we specifiy the *R* object (e.g. toothData) that we are plotting, and then we specify which value goes on which axis, as part of the plotting aesthetics (`aes()`).
+In the following line, we will plot the dose levels on the x-axis, and the tooth length on the y axis.
+
+By adding the `+` at the end of the line, we are telling *R* that there is another line of code to come, and this is where we add the plotting "geometry".
+Here, the gemoetry we are choosing is a boxplot and as this is our last layer, we don't need the `+` at the end of this line.
+
+```{r}
+ggplot(toothData, aes(x = dose, y = len)) +
+  geom_boxplot()
+```
+
+By specifying the additional parameter to fill the boxes using the supplement method (`fill = supp`), the boxes will now be separated based on this parameter, at each dose level.
+
 
 ```{r}
 ggplot(toothData, aes(x = dose, y = len, fill = supp)) +
   geom_boxplot()
 ```
 
-These need re-ordering...
+There are four options we can set for the plotting aesthetics:
+
+1. x: the column to be displayed on the x-axis
+2. y: the column to be displayed on the y-axis
+3. fill: the column to be used to fill the shapes we are using to plot.
+4. colour: the column to be used to change the outline of the shapes.
+
+There are also many different types of plot geometry we can easily generate using ggplot.
+Instead of boxplots, we could have plotted the raw data points, using the supplement method as the colour:
+
+```{r}
+ggplot(toothData, aes(x = dose, y = len, colour = supp)) +
+  geom_point()
+```
+
+In the next example, we are looking at the general distribution of the entire dataset as a histogram.
 
 ```{r}
 ggplot(toothData, aes(x = len)) +
   geom_histogram()
 ```
 
+Instead of a histogram, we could also plot a smoothed density.
+The additional parameter being passed to the density, controls the transparency of each colour used to shade each density.
+
 ```{r}
 ggplot(toothData, aes(x = len, fill = supp)) +
   geom_density(alpha = 0.5)
 ```
 
+`ggplot2` also has the ability to separate plots based on a categorical variable, using an additional parameter where we break the plots unto "facets".
+Here we are using the *R* syntax for "is a function of", which is specified using the tilde `~`.
+By leaving a blank LHS, we are implying that everything is a function of `dose`, so that the plots will be generated separating on this variable.
 
 ```{r}
 ggplot(toothData, aes(x = len, fill = supp)) +
   geom_density(alpha = 0.5) +
   facet_wrap(~dose)
 ```
+
+We can produce very detailed plots using multiple lines of code, which we don't have enough time to fully explore today.
+```{r}
+ggplot(toothData, aes(x = dose, y = len, fill = supp)) +
+  geom_boxplot() +
+  labs(x = "Dose Level", y = "Tooth Length") +
+  theme_bw()
+```
+
+**What did the command **`labs(...)` **do?**
+
+**What effect did the line **`theme_bw()` **have?**

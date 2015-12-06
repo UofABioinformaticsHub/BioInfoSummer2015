@@ -135,7 +135,7 @@ These can be a trap for the unwary, as behind the scenes R has saved these as th
 ```{r}
 as.integer(Groups)
 ```
-In one sense, these are like a hybrid of an integer vector, with a character vector included which contains the various category names.
+In one sense, these are like a hybrid of an integer vector, where the values represent the category number, and a character vector which contains the various category names.
 In the old days of puny computers, this was more memory efficient.
 It also makes sense when you consider statistical modelling is at the heart of R.
 
