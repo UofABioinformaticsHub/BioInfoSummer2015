@@ -8,6 +8,13 @@ output: html_document
 ## This website
 http://steveped.github.io/BioInfoSummer2015/index.html
 
+## R and RStudio
+*R* is available from https://www.cran.r-project.org/
+
+RStudio is available from https://www.rstudio.com/
+
+**Please ensure you have a working installation of RStudio!**
+
 ## Today's Data
 `git clone https://github.com/steveped/BioInfoSummer2015.git`
 
