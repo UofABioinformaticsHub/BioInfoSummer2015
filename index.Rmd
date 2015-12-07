@@ -41,7 +41,7 @@ The individual sessions are available at the following sites:
 ### Data in R
 [01_Data](01_Data.html)  
 [02_Loading_Data](02_Loading_Data.html)  
-[03_Inspecting_Data](03_Inspecting_Data,html)  
+[03_Inspecting_Data](03_Inspecting_Data.html)  
 
 ### Functions in R
 [04_Introducing_Functions](04_Introducing_Functions.html)  
