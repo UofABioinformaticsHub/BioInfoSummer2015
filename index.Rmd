@@ -1,5 +1,5 @@
 ---
-title: "Stream C: Introduction to R Programming (BioinfoSummer 2015)"
+title: "Stream B2: Introduction to R Programming (BioinfoSummer 2015)"
 author: "Pengyi Yang & Stephen Pederson"
 date: "7 December 2015"
 output: html_document
