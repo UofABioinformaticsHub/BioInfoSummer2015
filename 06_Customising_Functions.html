@@ -105,7 +105,7 @@ ggplot(toothData, aes(x = dose, y = len, fill = supp)) +
 </div>
 <div id="writing-a-function-for-our-needs" class="section level2">
 <h2>Writing A Function For Our Needs</h2>
-<p>Our task is to conduct a <code>t.test()</code> for each dose level, to see if there is any effect on tooth length. First, let’s try it for the low dosage level. Remember that for a T-test, we have the null and alternate hypotheses:</p>
+<p>Our task is to conduct a <code>t.test()</code> for each dose level, to see if there is any effect on tooth length. First, let’s try it for the low dosage level. Remember that for a <span class="math">\(T\)</span>-test, we have the null and alternate hypotheses:</p>
 <p><span class="math">\(H_0\)</span>: <span class="math">\(\mu_1 = \mu_2\)</span></p>
 <p><span class="math">\(H_A\)</span>: <span class="math">\(\mu_1 \neq \mu_2\)</span></p>
 <p>Firstly we could do this by breaking the data into two groups and testing the Null Hypothesis:</p>
@@ -125,7 +125,7 @@ t.test(g1, g2, alternative = &quot;two.sided&quot;)</code></pre>
 ## sample estimates:
 ## mean of x mean of y 
 ##     13.23      7.98</code></pre>
-<p>An alternate method would be to use the <em>R</em> syntax, for <code>len</code> <em>is dependent on</em> <code>supp</code>, where the tilde <code>~</code> can be interpreted with this meaning. We can also subset the data as part of the T-test function.</p>
+<p>An alternate method would be to use the <em>R</em> syntax, for <code>len</code> <em>is dependent on</em> <code>supp</code>, where the tilde <code>~</code> can be interpreted with this meaning. We can also subset the data as part of the <span class="math">\(T\)</span>-test function.</p>
 <pre class="r"><code>t.test(len ~ supp, data = toothData, subset = dose == &quot;Low&quot;)</code></pre>
 <pre><code>## 
 ##  Welch Two Sample t-test

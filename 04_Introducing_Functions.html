@@ -71,24 +71,18 @@ img {
 <h2>Functions - An Introduction</h2>
 <p>NB: This section assumes an understanding of what <code>vector</code>, <code>data.frame</code> and <code>list</code> objects are in <em>R</em>. If you’re not sure, call a tutor over to discuss this.</p>
 <p>Functions are also <em>R</em> object, but instead of containing data, they contain instructions for performing some operation. We use them to “do things”, then we usually obtain some output as a plot, or another R object.</p>
-<ul>
-<li>Some well known ones are <code>max()</code>, <code>min()</code>, <code>mean()</code>, <code>sd()</code></li>
-</ul>
+<p>Some well known ones are <code>max()</code>, <code>min()</code>, <code>mean()</code>, <code>sd()</code></p>
 <pre class="r"><code>y &lt;- c(1, 16, 2, 9)
 mean(y)
 min(y)
 sd(y)
 sqrt(y)</code></pre>
-<ul>
-<li>Functions usually take some input, but some special functions don’t.</li>
-</ul>
+<p>Functions usually take some input, but some special functions don’t.</p>
 <pre class="r"><code>browseVignettes()
 help.start()
 Sys.Date()</code></pre>
-<ul>
-<li>To execute a function, we need to place round brackets <code>()</code> after the name<br />(Otherwise we see the code)</li>
-</ul>
-<p><strong>An R Package is essentially just a collection of functions!</strong></p>
+<p>To execute a function, we need to place round brackets <code>()</code> after the name, otherwise we see the code.</p>
+<p><strong>An R Package is essentially just a collection of functions!</strong><br />When we load a package, we’re giving ourselves access to the functions in that package.</p>
 </div>
 <div id="passing-r-objects-or-arguments-to-functions" class="section level2">
 <h2>Passing R objects or arguments to functions</h2>
@@ -97,8 +91,8 @@ Sys.Date()</code></pre>
 <p>Notice that this function requires two arguments, the first is called <code>x</code> and the second is called <code>na.rm</code>. These are the names that are essentially just placeholders for the objects we pass to them.</p>
 <div id="the-argument-x" class="section level4">
 <h4>The argument <code>x</code></h4>
-<p>No matter what the object is called that we give to the first position <code>x</code>, the function will temporarily create an internal copy of the object, call it <code>x</code>, then perform all operations on this object called <code>x</code>, leaving your original <em>R</em> object unchanged.</p>
-<p>When we called the function using <code>sd(y)</code> above, the vector <code>y</code> was temporarily copied, renamed <code>x</code> and then the function operated on this copy of the object. (NB: This is a slightly crude description for the sake of simplicity, so purists please be understanding)</p>
+<p>No matter what the object is called in your <em>R</em> environment, once we pass it to the first position <code>x</code>, the function will temporarily create an internal copy of the object, call it <code>x</code>, then perform all operations on this object called <code>x</code>, leaving your original <em>R</em> object unchanged.</p>
+<p>When we called the function using <code>sd(y)</code> above, the vector <code>y</code> was temporarily copied, renamed <code>x</code> inside the function, and then the function operated on this copy of the object. (NB: This is a deliberately simplified description for the sake of understanding, so purists please be understanding.)</p>
 </div>
 <div id="the-argument-na.rm-false" class="section level4">
 <h4>The argument <code>na.rm = FALSE</code></h4>
@@ -106,7 +100,7 @@ Sys.Date()</code></pre>
 </div>
 <div id="specifying-arguments-by-name" class="section level4">
 <h4>Specifying arguments by name</h4>
-<p>In <em>R</em>, we can specify arguments stricty by order without naming them, or we can name tham and specify them out of order. <strong>Which of the following lines of code would be valid?</strong></p>
+<p>In <em>R</em>, we can specify arguments strictly by order without naming them, or we can name them and specify them out of order. <strong>Which of the following lines of code would be valid?</strong></p>
 <pre class="r"><code>sd(x = y)
 sd(y, TRUE)
 sd(TRUE, y)

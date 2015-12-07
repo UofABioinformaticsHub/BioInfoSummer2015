@@ -41,7 +41,7 @@ ggplot(toothData, aes(x = dose, y = len, fill = supp)) +
 
 Our task is to conduct a `t.test()` for each dose level, to see if there is any effect on tooth length.
 First, let's try it for the low dosage level.
-Remember that for a T-test, we have the null and alternate hypotheses:
+Remember that for a $T$-test, we have the null and alternate hypotheses:
 
 $H_0$: $\mu_1 = \mu_2$
 
@@ -58,7 +58,7 @@ t.test(g1, g2, alternative = "two.sided")
 ```
 
 An alternate method would be to use the *R* syntax, for `len` *is dependent on* `supp`, where the tilde `~` can be interpreted with this meaning.
-We can also subset the data as part of the T-test function.
+We can also subset the data as part of the $T$-test function.
 
 ```{r}
 t.test(len ~ supp, data = toothData, subset = dose == "Low")

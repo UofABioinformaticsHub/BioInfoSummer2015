@@ -1,7 +1,7 @@
 ---
 title: "Writing Functions"
 author: "Steve Pederson & Pengyi Yang"
-date: "6 December 2015"
+date: "7 December 2015"
 output: html_document
 ---
 
@@ -28,13 +28,13 @@ myMean <- function(x){
 
 The functions needs:
 
-1. A `name` so we can 'call' it, and guess what the function does
+1. A `name` so we can 'call' it, and make an educated guess what the function does
 2. An `argument` (or input) to 'do something' to.  
 3. A `body` which is the code that runs when we call the function
 
 
 As mentioned previously
- : `x` is just a place holder for "some R object"
+ : `x` is just a place holder for "some *R* object"
  : This object then becomes called `x` as far as the function is concerned
 
 Let's run it:
@@ -50,7 +50,7 @@ Check it against the real function
 mean(y)
 ```
 
-**NB:** We didn't need to write `myMean(x = y)`
+**NB:** We didn't need to write `myMean(x = y)`.
 
 Just like any other *R* function we can find what the arguments are, and what the code is:
 ```{r}
@@ -61,9 +61,9 @@ body(myMean)
 
 ## Writing functions for NOT you
 
-(I mean you in 6 months, when you have no idea what you did and you think you're an idiot)
+When we write code, we write for someone who is not you, which is probably you in 6 months, when you have no idea what you did and you think you're an idiot.
 
-We can place comments in the code
+To make life easier for our future selves, we can place comments in the code.
 
 ```{r}
 myMean <- function(x){

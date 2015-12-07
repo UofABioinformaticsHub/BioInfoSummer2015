@@ -8,7 +8,7 @@ output: html_document
 R offers numerous advantages over Excel, GraphPad Prism & the like:  
 
 - Can handle extremely large datasets  
-- We can perform complex analytic precedures
+- We can perform complex analytic procedures
 - Many processes come as inbuilt functions  
 - _We have code to record and repeat our analysis_
   
@@ -24,7 +24,6 @@ We will also briefly touch on:
 
 - Reading data into R
 - Visualising Data
-- The package _clueR_
 
 ## The R Environment
 In the R Environment, we can create objects of multiple types.
@@ -41,6 +40,11 @@ In RStudio, the _Environment_ tab in the top right shows what's currently in our
 ![The Environment Tab](figure/EnvironmentTab.png)
 
 Nothing is saved to disk, until we save the complete Environment as an _.RData_ object.
+We can do this by clicking the disk symbol in the Environment Tab, or by entering the code:
+```{r, eval=FALSE}
+save.image()
+```
+By default, *R* will save the workspace as a file named `.RData` and this will contain all of the *R* objects you currently have in your environment.
 
 
 ## Data Types
@@ -58,11 +62,11 @@ Excel will automatically try to convert "7" to the value 7, but automatic conver
 In R we maintain control over this delineation.
 
 ## The Basic Data Types
-The basic data types in R are:
+The basic (or atomic) data types in R are:
 
 logical (TRUE or FALSE)
 ```{r}
-x > 1
+x == 5
 ```
 
 integer
@@ -80,7 +84,11 @@ character
 species <- "mouse"
 ```
 
-__When would you need an integer rather than a double?__
+**When would you need an integer rather than a double?**
+
+- For count data
+- For indexing rows or columns in a `matrix`
+- For incrementing through a process in steps
 
 ## Vectors
 R sees everything as a _vector_
@@ -93,9 +101,12 @@ lifeSpans
 This is a _numeric_ vector, where all entries are double precision entries (i.e. they have decimal points).  
 **What would happen if we accidentally included the letter "a" in this vector?**
 
+- *R* would convert all the numbers to characters, and we would have to convert them back to numbers before proceeding any further.
+
+
 We can perform simple operations on a vector by using some in-built functions.
 Functions in R, consist of their name, followed by the round braces `()`.
-We pass an *R* object to the function, by including it inside these braces.
+We then pass an *R* object to the function, by including it inside these braces.
 ```{r}
 mean(lifeSpans)
 ```
@@ -106,7 +117,18 @@ Some examples may be sd(), var(), max(), min(), median(), summary()
 **Could we apply these functions to integer vectors?**  
 **What about character vectors?**
 
-In the above, we just printed the reults to the screen.
+Try some if you'd like.
+```{r}
+int_vec <- 1:5
+sd(int_vec)
+char_vec<- c("cats", "internet")
+min(char_vec)
+```
+Try the different functions and see what results they give you.
+You might see confusing error messages, but remember **error messages are your friend**.
+They tell you something isn't right, and (sometimes) give you a clue as to what is wrong, even though they can be frustrating.
+
+In the above, we just printed the results to the screen.
 Sometimes we may want to save the results as a new *R* object.
 For example, every vector also has a length attribute, which is just the number of entries in the vector, and this can be how we find out our sample size.
 ```{r}
@@ -124,14 +146,14 @@ lifeSpans[4:6]
 
 ## Factors
 One other data type we see in R is a _factor_.
-R will sometimes assume that any character strings represent categorical variables.
+*R* will sometimes assume that any character strings represent categorical variables.
 ```{r}
 Groups <- c("treated", "control", "control", "control", "treated", "treated")
 Groups <- factor(Groups)
 Groups
 ```
 
-These can be a trap for the unwary, as behind the scenes R has saved these as the integers, corresponding to which category (_or factor level_) the values belong to.
+These can be a trap for the unwary, as behind the scenes *R* has saved these as integers, corresponding to which category (_or factor level_) the values belong to.
 ```{r}
 as.integer(Groups)
 ```
@@ -140,7 +162,7 @@ In the old days of puny computers, this was more memory efficient.
 It also makes sense when you consider statistical modelling is at the heart of R.
 
 ## Data Frames
-One of the most common data structures in R is a `data.frame`.
+One of the most common data structures in *R* is a `data.frame`.
 These are very similar to a spreadsheet in Excel, and we have columns with information in them.
 *Each column must be the same length!*
 ```{r}

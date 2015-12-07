@@ -69,7 +69,7 @@ img {
 
 <div id="loading-data" class="section level2">
 <h2>Loading Data</h2>
-<p>We can load data into R using some more built-in functions, and by default <em>R</em> imports each file as a <code>data.frame</code>. <em>R</em> expects to see some kind of delimiter it can use to make columns, and these can be:</p>
+<p>We can load data into <em>R</em> using some more built-in functions, and by default <em>R</em> imports each file as a <code>data.frame</code>. <em>R</em> expects to see some kind of delimiter it can use to make columns, and these can be:</p>
 <ol style="list-style-type: decimal">
 <li>commas (e.g. a .csv file)</li>
 <li>tabs (e.g a .tsv file)</li>
@@ -99,11 +99,11 @@ img {
 </ul></li>
 </ol>
 <p><strong>Try changing a few to see what effect they have on the</strong> <code>data.frame</code> <strong>preview</strong></p>
-<p>Now load the data, unchecking the <code>Strings as factors</code> box, and two lines of code will appear in your console. The second line of your code <code>View(toothData)</code> was entered by the GUI and will have made a preview frame of your data appear, just like a spreadsheet. We can use the function <code>View()</code> to inspect an R object anytime, although large objects will be truncated. Files with many rows or columns clearly place huge demands on your memory, and there is no pratical advantage to looking these using this method.</p>
+<p>Now load the data, unchecking the <code>Strings as factors</code> box, and two lines of code will appear in your console. The second line of your code <code>View(toothData)</code> was entered by the GUI and will have made a preview frame of your data appear, just like a spreadsheet. We can use the function <code>View()</code> to inspect an R object anytime, although large objects will be truncated. Files with many rows or columns clearly place huge demands on your memory, and there is no pratical advantage to looking at these using this method.</p>
 <p><strong>Two important points</strong></p>
 <ol style="list-style-type: decimal">
-<li>Using this method will give the <em>R</em> object, the same name as the file name, i.e. <code>toothData</code></li>
-<li>Notice that this has generated two lines of code. If using this method, <strong>ALWAYS</strong> copy the first line to your R script. This contains actual code the GUI used to load your dataset, and just re-running this line will always perform the exact same action.</li>
+<li>Using the GUI to import data will give the <em>R</em> object, the same name as the file name, i.e. <code>toothData</code></li>
+<li>Notice that this has generated two lines of code. If using this method, <strong>ALWAYS COPY THE FIRST LINE</strong> to your R script. This contains actual code the GUI used to load your dataset, and just re-running this line will always perform the exact same action.</li>
 </ol>
 <p>In our sample code, we should see<br /><code>toothData &lt;- read.csv(&quot;path/to/data/toothData.csv&quot;, stringsAsFactors = FALSE)</code>. (NB: <code>path/to/data/</code> will actually be different for all of you, depending on where you saved the file.) Notice that this will have loaded the data, treating the character strings as character strings, instead of categorical variables.</p>
 </div>
@@ -120,6 +120,7 @@ img {
 <pre class="r"><code>toothData$supp &lt;- as.factor(toothData$supp)</code></pre>
 <p>However, if we wish to specify these in non-alphabetic order we can set the category order using</p>
 <pre class="r"><code>toothData$dose &lt;- factor(toothData$dose, levels=c(&quot;Low&quot;, &quot;Med&quot;, &quot;High&quot;))</code></pre>
+<p>Notice that in both of the above lines of code, we overwrote the original columns of data in the <em>R</em> object <code>toothData</code>.</p>
 </div>
 
 

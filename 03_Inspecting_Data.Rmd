@@ -1,7 +1,7 @@
 ---
 title: "Inspecting Data"
-author: "Steve Pederson"
-date: "5 December 2015"
+author: "Steve Pederson & Pengyi Yang"
+date: "7 December 2015"
 output: html_document
 ---
 
@@ -20,14 +20,30 @@ toothData$supp <- as.factor(toothData$supp)
 toothData$dose <- factor(toothData$dose, levels=c("Low", "Med", "High"))
 ```
 
+We can look at the first few rows using the function `head()`
+
 ```{r}
 head(toothData)
+```
+
+We can obtain an overall summary of the data using the function `summary()`
+
+```{r}
 summary(toothData)
+```
+
+Or we could count the rows.
+
+```{r}
 nrow(toothData)
 ```
 
+If you found 60 rows, everything has loaded correctly so we can move on.
+
+
 ## Plotting the data using ggplot2
 
+#### Installing ggplot2
 *R* makes visually inspecting the data a relatively straight-forward task, and in particular, the package `ggplot2` has some powerful plotting functions.
 If you don't have this package already installed, you can simply install this using the following command:
 
@@ -64,7 +80,7 @@ ggplot(toothData, aes(x = dose, y = len, fill = supp)) +
   geom_boxplot()
 ```
 
-There are four options we can set for the plotting aesthetics:
+There are four options we can set for the plotting aesthetics, giving us up to four columns we can use in the plots.
 
 1. `x`: the column to be displayed on the x-axis
 2. `y`: the column to be displayed on the y-axis

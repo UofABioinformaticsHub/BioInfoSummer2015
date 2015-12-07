@@ -13,7 +13,7 @@ If you're not sure, call a tutor over to discuss this.
 Functions are also *R* object, but instead of containing data, they contain instructions for performing some operation.
 We use them to "do things", then we usually obtain some output as a plot, or another R object.
 
-- Some well known ones are `max()`, `min()`, `mean()`, `sd()`
+Some well known ones are `max()`, `min()`, `mean()`, `sd()`
 
 ```{r, eval=FALSE}
 y <- c(1, 16, 2, 9)
@@ -23,7 +23,7 @@ sd(y)
 sqrt(y)
 ```
 
-- Functions usually take some input, but some special functions don't.
+Functions usually take some input, but some special functions don't.
 
 ```{r, eval=FALSE}
 browseVignettes()
@@ -31,10 +31,10 @@ help.start()
 Sys.Date()
 ```
 
-- To execute a function, we need to place round brackets `()` after the name  
-(Otherwise we see the code)
+To execute a function, we need to place round brackets `()` after the name, otherwise we see the code.
 
-**An R Package is essentially just a collection of functions!**
+**An R Package is essentially just a collection of functions!**  
+When we load a package, we're giving ourselves access to the functions in that package.
 
 ## Passing R objects or arguments to functions
 
@@ -50,10 +50,10 @@ These are the names that are essentially just placeholders for the objects we pa
 
 #### The argument `x`
 
-No matter what the object is called that we give to the first position `x`, the function will temporarily create an internal copy of the object, call it `x`, then perform all operations on this object called `x`, leaving your original *R* object unchanged.
+No matter what the object is called in your *R* environment, once we pass it to the first position `x`, the function will temporarily create an internal copy of the object, call it `x`, then perform all operations on this object called `x`, leaving your original *R* object unchanged.
 
-When we called the function using `sd(y)` above, the vector `y` was temporarily copied, renamed `x` and then the function operated on this copy of the object.
-(NB: This is a slightly crude description for the sake of simplicity, so purists please be understanding)
+When we called the function using `sd(y)` above, the vector `y` was temporarily copied, renamed `x` inside the function, and then the function operated on this copy of the object.
+(NB: This is a deliberately simplified description for the sake of understanding, so purists please be understanding.)
 
 #### The argument `na.rm = FALSE`
 
@@ -62,7 +62,7 @@ In the function definition, it is given a default value (`na.rm = FALSE`), so we
 This argument controls whether we include, or ignore any `NA` values.
 
 #### Specifying arguments by name
-In *R*, we can specify arguments stricty by order without naming them, or we can name tham and specify them out of order.
+In *R*, we can specify arguments strictly by order without naming them, or we can name them and specify them out of order.
 **Which of the following lines of code would be valid?**
 ```{r, eval=FALSE}
 sd(x = y)

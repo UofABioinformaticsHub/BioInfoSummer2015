@@ -63,7 +63,7 @@ img {
 <div id="header">
 <h1 class="title">Writing Functions</h1>
 <h4 class="author"><em>Steve Pederson &amp; Pengyi Yang</em></h4>
-<h4 class="date"><em>6 December 2015</em></h4>
+<h4 class="date"><em>7 December 2015</em></h4>
 </div>
 
 
@@ -89,11 +89,11 @@ img {
 }</code></pre>
 <p>The functions needs:</p>
 <ol style="list-style-type: decimal">
-<li>A <code>name</code> so we can ‘call’ it, and guess what the function does</li>
+<li>A <code>name</code> so we can ‘call’ it, and make an educated guess what the function does</li>
 <li>An <code>argument</code> (or input) to ‘do something’ to.<br /></li>
 <li>A <code>body</code> which is the code that runs when we call the function</li>
 </ol>
-<p>As mentioned previously : <code>x</code> is just a place holder for “some R object” : This object then becomes called <code>x</code> as far as the function is concerned</p>
+<p>As mentioned previously : <code>x</code> is just a place holder for “some <em>R</em> object” : This object then becomes called <code>x</code> as far as the function is concerned</p>
 <p>Let’s run it:</p>
 <pre class="r"><code>y &lt;- c(1, 16, 2, 9)
 myMean(y)</code></pre>
@@ -101,7 +101,7 @@ myMean(y)</code></pre>
 <p>Check it against the real function</p>
 <pre class="r"><code>mean(y)</code></pre>
 <pre><code>## [1] 7</code></pre>
-<p><strong>NB:</strong> We didn’t need to write <code>myMean(x = y)</code></p>
+<p><strong>NB:</strong> We didn’t need to write <code>myMean(x = y)</code>.</p>
 <p>Just like any other <em>R</em> function we can find what the arguments are, and what the code is:</p>
 <pre class="r"><code>formals(myMean)</code></pre>
 <pre><code>## $x</code></pre>
@@ -114,8 +114,8 @@ myMean(y)</code></pre>
 </div>
 <div id="writing-functions-for-not-you" class="section level2">
 <h2>Writing functions for NOT you</h2>
-<p>(I mean you in 6 months, when you have no idea what you did and you think you’re an idiot)</p>
-<p>We can place comments in the code</p>
+<p>When we write code, we write for someone who is not you, which is probably you in 6 months, when you have no idea what you did and you think you’re an idiot.</p>
+<p>To make life easier for our future selves, we can place comments in the code.</p>
 <pre class="r"><code>myMean &lt;- function(x){
   
   # First, count how many values are in x
