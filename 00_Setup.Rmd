@@ -1,0 +1,82 @@
+---
+title: "Computer Setup"
+author: "University of Adelaide, Bioinformatics Hub"
+output: html_document
+---
+
+## R and RStudio
+
+*R* is available from https://www.cran.r-project.org/ 
+
+RStudio is available from https://www.rstudio.com/
+
+Download *R* first, then `RStudio`. 
+*R* is the main software we are using, whilst `RStudio` is a user-friendly interface to this software environment.
+
+Please ensure you have a working installation of `RStudio`, simply by opening the software.
+We will not need to access *R* directly.
+
+## ADAPT
+
+*R* and `RStudio` are also part of the University's SOE which can be accessed using ADAPT.
+If you would prefer to use your desktop on the University's ADAPT system as an alternative to an installation on your own laptop, this should be fine.
+However, the code has not been specifically tested in this environment.
+
+__If you plan to use this method, please ensure you can connect and open the software before the workshop.__
+
+## R Setup
+
+Once you have *R* and `RStudio` installed, open `RStudio` and in the `Console` enter the follow commands.
+You can cut & paste these as a single command.
+
+```{r, eval=FALSE}
+packList <- c("readr", "dplyr", "ggplot2", "readxl", "reshape2")
+install.packages(packList)
+```
+
+Don't worry too much about all the information that should appear during this process.
+
+### Note for Windows Users
+
+In the above we have installed the package `dplyr`, which can sometimes be problematic on University-owned laptops.
+To test that your installation was successful, please cut & copy the following command
+
+```{r, eval = FALSE}
+all(packList %in% rownames(installed.packages()))
+```
+
+If this returns `TRUE` you are good to go.
+
+If the above returned `FALSE` take the following actions:
+    
+1. Create a new folder `C:\R`  
+2. Create a new `Environment Variable` using the steps below called `R_LIBS_USER` and give it the value `C:\R`
+3. After these steps, close then re-open RStudio and run the code again
+4. If these steps don't resolve the problem, please connect RStudio using your desktop on the ADAPT system.
+
+#### Creating a new Environment Variable: Windows 10 and Windows 8
+
+1. In Search, search for and then select: `System (Control Panel)`
+2. Click the `Advanced` system settings link.
+3. Click `Environment Variables`. 
+4. In the User Variables Section, click `New...`
+5. Name the New Variable `R_LIBS_USER` and specify the value `C:\R`
+
+#### Creating a new Environment Variable:  Windows 7
+
+1. From the desktop, right click the Computer icon.
+2. Choose Properties from the context menu.
+3. Click the `Advanced` system settings link.
+4. Click `Environment Variables`. 
+5. In the User Variables Section, click `New...`
+6. Name the New Variable `R_LIBS_USER` and specify the value `C:\R`
+
+## Today's Data
+
+For those familiar with the version control system `Git`, you can clone the repository using
+
+`git clone https://github.com/UofABioinformaticsHub/schoolOfMedicine2016.git`
+
+Otherwise, just download today's data as a `zipfile` using the following link.
+
+https://github.com/UofABioinformaticsHub/schoolOfMedicine2016/archive/gh-pages.zip
