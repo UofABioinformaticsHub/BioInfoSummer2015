@@ -55,7 +55,7 @@ If the above returned `FALSE` take the following actions:
 1. Create a new folder `C:\R`  
 2. Create a new `Environment Variable` using the steps below called `R_LIBS_USER` and give it the value `C:\R`
 3. After these steps, close then re-open RStudio and run the code again
-4. If these steps don't resolve the problem, please connect to your desktop on the ADAPT system and use this version of `RStudio`.
+4. If these steps don't resolve the problem, please connect to your desktop on the ADAPT system and use the version of `RStudio` installed there.
 
 #### Creating a new Environment Variable: Windows 10 and Windows 8
 

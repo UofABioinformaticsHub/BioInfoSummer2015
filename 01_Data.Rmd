@@ -1,29 +1,57 @@
 ---
 title: "01 DataTypes"
-author: "Pengyi Yang & Stephen Pederson"
+author: "Steve Pederson"
 output: html_document
 ---
 
 ## Why use R?
 R offers numerous advantages over Excel, GraphPad Prism & the like:  
 
+### Designed for real data
+
 - Can handle extremely large datasets  
-- We can perform complex analytic procedures
+- We can easily perform complex analytic procedures
 - Many processes come as inbuilt functions  
+- Huge user base of biological researchers
+
+### Automatic Conversion
+
+Excel is notorious for converting values from one type to another inappropriately.
+
+- Gene names are often converted to dates 
+    - Septin genes (e.g. _SEPT9_)
+    - "Deleted in Esophigeal Cancer 1" (_DEC1_)
+
+- Genotypes can be converted into numeric values
+    - A homozygote for the first allele (1/1)
+    
+### Reproducible Research
+
+- Research is littered with mistakes from Excel
+- Studies have made Phase III trials
 - _We have code to record and repeat our analysis_
-  
+- We can track errors more easily than if they are copy/paste errors
+
+## Using R
+
 >"With power comes great responsibility" - Uncle Ben
   
 With this extra capability, we need to understand a little about:  
 
 - Data Types  
 - Data Structures  
-- Functions  
 
 We will also briefly touch on:  
 
 - Reading data into R
 - Visualising Data
+
+
+## RStudio
+
+This is the main way we interact with R
+
+![](figure/RStudio.png)
 
 ## The R Environment
 In the R Environment, we can create objects of multiple types.
@@ -58,7 +86,11 @@ The first represents the value 7, whilst the second is the character that we use
 To your computer these mean different things!
 
 Excel will automatically try to convert "7" to the value 7, but automatic conversion can be troublesome.
-(Try entering the gene names for SEPT9, DEC1, FEB2 etc. into Excel.)
+
+__What happens when you enter the gene names for SEPT9, DEC1, FEB2 etc. into Excel?__
+
+__What about if you have genotypes coded as `0/1`, `1/1`, `1/2` etc__
+
 In R we maintain control over this delineation.
 
 ## The Basic Data Types
