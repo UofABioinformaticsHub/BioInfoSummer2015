@@ -28,6 +28,16 @@ For more intermediate participants in the course we will examine more complex vi
 ## Course Material
 The individual sessions are available at the following sites:
 
+## Today's Data
+
+For those familiar with the version control system `Git`, you can clone the repository using
+
+`git clone https://github.com/UofABioinformaticsHub/schoolOfMedicine2016.git`
+
+Otherwise, just download today's data as a `zipfile` using the following link.
+
+https://github.com/UofABioinformaticsHub/schoolOfMedicine2016/archive/gh-pages.zip
+
 ### Data in R
 [01_Data](01_Data.html)  
 [02_Loading_Data](02_Loading_Data.html)  

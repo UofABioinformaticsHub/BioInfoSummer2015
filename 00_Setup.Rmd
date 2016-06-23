@@ -4,6 +4,8 @@ author: "University of Adelaide, Bioinformatics Hub"
 output: html_document
 ---
 
+To return to the previous page click [here](https://uofabioinformaticshub.github.io/schoolOfMedicine2016/) or use the back button on your browser.
+
 ## R and RStudio
 
 *R* is available from https://www.cran.r-project.org/ 
@@ -52,7 +54,7 @@ If the above returned `FALSE` take the following actions:
 1. Create a new folder `C:\R`  
 2. Create a new `Environment Variable` using the steps below called `R_LIBS_USER` and give it the value `C:\R`
 3. After these steps, close then re-open RStudio and run the code again
-4. If these steps don't resolve the problem, please connect RStudio using your desktop on the ADAPT system.
+4. If these steps don't resolve the problem, please connect to your desktop on the ADAPT system and use this version of `RStudio`.
 
 #### Creating a new Environment Variable: Windows 10 and Windows 8
 
@@ -71,12 +73,4 @@ If the above returned `FALSE` take the following actions:
 5. In the User Variables Section, click `New...`
 6. Name the New Variable `R_LIBS_USER` and specify the value `C:\R`
 
-## Today's Data
-
-For those familiar with the version control system `Git`, you can clone the repository using
-
-`git clone https://github.com/UofABioinformaticsHub/schoolOfMedicine2016.git`
-
-Otherwise, just download today's data as a `zipfile` using the following link.
-
-https://github.com/UofABioinformaticsHub/schoolOfMedicine2016/archive/gh-pages.zip
+[Back](https://uofabioinformaticshub.github.io/schoolOfMedicine2016/)
