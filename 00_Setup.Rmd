@@ -1,5 +1,6 @@
 ---
-title: "Computer Setup"
+title: "School Of Medicine: R Workshop"
+subtitle: "Computer Setup"
 author: "University of Adelaide, Bioinformatics Hub"
 output: html_document
 ---
