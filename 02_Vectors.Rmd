@@ -13,7 +13,7 @@ Importantly, _every entry must be of the same data type_!
 
 **Enter the following in the `Script Window` then send it to the `Console`**
 
-_Here we'll use one of the most common R functions_ `c()` _to combine these numbers into a vector_
+_Here we'll use one of the most common R functions_ `c()` _to **combine** these numbers into a vector_
 
 ```{r}
 lifeSpans <- c(2.1, 1.9, 1.7, 1.8, 2.3, 2.5)
@@ -22,7 +22,6 @@ lifeSpans <- c(2.1, 1.9, 1.7, 1.8, 2.3, 2.5)
 This is a _numeric_ vector, where all entries are double precision entries (i.e. they have decimal points).  
 
 Note that this appears differently in the `Environment Tab` to the initial object `x`.
-
 Now we can see details on _how many values_ are in the vector, and _what type_ of values they are.
 
 **What would happen if we accidentally included the letter "a" in this vector?**
@@ -42,15 +41,18 @@ mean(lifeSpans)
 Note that we haven't made a new *R* object.
 We'll do that in a few minutes.
 
-**NB: Tab Auto-Complete is the best**
+#### Using Tab Auto-Complete
 
 Instead of typing the complete object name in the above code, we can just start typing the name inside the function `mean()`, then hitting the `Tab` key.
 Try entering `mean(life + Tab)`, where `+ Tab` is the tab key.
 The available options will appear and you can just choose the appropriate one.
 This can be a huge time-saver!
 
-**Try some other functions**  
-Some examples may be `sd()`, `var()`, `max()`, `min()`, `median()`, `summary()`
+#### Now try some other functions
+
+Some examples may be `sd()`, `var()`, `max()`, `min()`, `median()`, `summary()`.
+Use Tab Auto-Complete to avoid typos.
+
 
 ```{r, eval=FALSE}
 sd(lifeSpans)
@@ -69,11 +71,13 @@ lifeSpans > 2
 **What about character vectors?**
 
 Try some if you'd like.
+
 ```{r, eval=FALSE}
 charVec<- c("cats", "internet")
 min(charVec)
 mean(charVec)
 ```
+
 Try the different functions and see what results they give you.
 You might see confusing error messages, but remember *error messages are your friend*.
 They tell you something isn't right, and (sometimes) give you a clue as to what is wrong, even though they can be frustrating.
@@ -81,6 +85,7 @@ They tell you something isn't right, and (sometimes) give you a clue as to what 
 In the above, we just printed the results to the screen.
 Sometimes we may want to save the results as a new *R* object.
 For example, every vector also has a length attribute, which is just the number of entries in the vector, and this can be how we find out our sample size.
+
 ```{r}
 sampleSize <- length(lifeSpans)
 sampleSize

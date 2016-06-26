@@ -19,13 +19,15 @@ The R programming language provides an effective environment for making sense of
 In this introduction course, we will illustrate exploratory data analysis that involves calculating numerical and graphical summaries. 
 For more intermediate participants in the course we will examine more complex visualization tools.
 
-## Outline
-- R data types and operations
-- Read data in R and exploratory data analysis
-- Install package and calling functions from packages
-- Write your own functions
+## Topics Covered
+- *R* data types
+- Using functions in *R*
+- Reading data in *R* 
+- Exploratory data analysis
+- Installing packages
 
 ## Course Material
+
 The individual sessions are available at the following sites:
 
 ## Today's Data

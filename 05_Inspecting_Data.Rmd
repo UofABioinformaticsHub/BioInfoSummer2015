@@ -142,7 +142,9 @@ ggplot(toothData, aes(x = dose, y = len, fill = supp)) +
 
 ## Exploring the data using `dplyr`
 
-The *R* package `dplyr` makes exploring `data.frame` objects very simple.
+The *R* package `dplyr` makes exploring `data.frame` objects very simple, and contains numerous functions for this purpose.
+
+**If you don't have it installed, then use the same procedure as for `ggplot2`.**
 
 ```{r, message=FALSE, warning=FALSE}
 library(dplyr)

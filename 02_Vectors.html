@@ -126,11 +126,10 @@ $(document).ready(function () {
 <h2>Vectors</h2>
 <p>R sees everything as a <em>vector</em>. These are like columns in a spreadsheet, where we have entries in multiple cells. Importantly, <em>every entry must be of the same data type</em>!</p>
 <p><strong>Enter the following in the <code>Script Window</code> then send it to the <code>Console</code></strong></p>
-<p><em>Here we’ll use one of the most common R functions</em> <code>c()</code> <em>to combine these numbers into a vector</em></p>
+<p><em>Here we’ll use one of the most common R functions</em> <code>c()</code> <em>to <strong>combine</strong> these numbers into a vector</em></p>
 <pre class="r"><code>lifeSpans &lt;- c(2.1, 1.9, 1.7, 1.8, 2.3, 2.5)</code></pre>
 <p>This is a <em>numeric</em> vector, where all entries are double precision entries (i.e. they have decimal points).</p>
-<p>Note that this appears differently in the <code>Environment Tab</code> to the initial object <code>x</code>.</p>
-<p>Now we can see details on <em>how many values</em> are in the vector, and <em>what type</em> of values they are.</p>
+<p>Note that this appears differently in the <code>Environment Tab</code> to the initial object <code>x</code>. Now we can see details on <em>how many values</em> are in the vector, and <em>what type</em> of values they are.</p>
 <p><strong>What would happen if we accidentally included the letter “a” in this vector?</strong></p>
 <ul>
 <li><em>R</em> would convert all the numbers to characters, and we would have to convert them back to numbers before proceeding any further.</li>
@@ -141,9 +140,13 @@ $(document).ready(function () {
 <p>We can perform simple operations on a vector by using some in-built functions. Functions in R, consist of their name, followed by the round braces <code>()</code>. We then pass an <em>R</em> object to the function, by including it inside these braces.</p>
 <pre class="r"><code>mean(lifeSpans)</code></pre>
 <p>Note that we haven’t made a new <em>R</em> object. We’ll do that in a few minutes.</p>
-<p><strong>NB: Tab Auto-Complete is the best</strong></p>
+<div id="using-tab-auto-complete" class="section level4">
+<h4>Using Tab Auto-Complete</h4>
 <p>Instead of typing the complete object name in the above code, we can just start typing the name inside the function <code>mean()</code>, then hitting the <code>Tab</code> key. Try entering <code>mean(life + Tab)</code>, where <code>+ Tab</code> is the tab key. The available options will appear and you can just choose the appropriate one. This can be a huge time-saver!</p>
-<p><strong>Try some other functions</strong><br />Some examples may be <code>sd()</code>, <code>var()</code>, <code>max()</code>, <code>min()</code>, <code>median()</code>, <code>summary()</code></p>
+</div>
+<div id="now-try-some-other-functions" class="section level4">
+<h4>Now try some other functions</h4>
+<p>Some examples may be <code>sd()</code>, <code>var()</code>, <code>max()</code>, <code>min()</code>, <code>median()</code>, <code>summary()</code>. Use Tab Auto-Complete to avoid typos.</p>
 <pre class="r"><code>sd(lifeSpans)
 max(lifeSpans)
 summary(lifeSpans)</code></pre>
@@ -160,6 +163,7 @@ mean(charVec)</code></pre>
 <pre class="r"><code>sampleSize &lt;- length(lifeSpans)
 sampleSize</code></pre>
 <pre><code>## [1] 6</code></pre>
+</div>
 </div>
 <div id="subsetting-vectors" class="section level2">
 <h2>Subsetting Vectors</h2>

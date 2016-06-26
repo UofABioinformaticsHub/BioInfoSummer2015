@@ -206,7 +206,8 @@ $(document).ready(function () {
 </div>
 <div id="exploring-the-data-using-dplyr" class="section level2">
 <h2>Exploring the data using <code>dplyr</code></h2>
-<p>The <em>R</em> package <code>dplyr</code> makes exploring <code>data.frame</code> objects very simple.</p>
+<p>The <em>R</em> package <code>dplyr</code> makes exploring <code>data.frame</code> objects very simple, and contains numerous functions for this purpose.</p>
+<p><strong>If you don’t have it installed, then use the same procedure as for <code>ggplot2</code>.</strong></p>
 <pre class="r"><code>library(dplyr)</code></pre>
 <p>We could now filter the data instead of using <code>subset</code>. This behaves like the <code>Auto Filter</code> in Excel, so we can chain multiple filters together</p>
 <pre class="r"><code>filter(toothData, dose == &quot;Low&quot;)

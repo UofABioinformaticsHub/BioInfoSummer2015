@@ -117,6 +117,6 @@ anova(mouseLife_lm)
 summary(mouseLife_lm)
 ```
 
-The interpretation of these is beyond to scope of today's session.
+The interpretation of these is beyond the scope of today's session.
 
 [Back](https://uofabioinformaticshub.github.io/schoolOfMedicine2016/)
