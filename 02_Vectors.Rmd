@@ -1,0 +1,111 @@
+---
+title: "02 Vectors and Functions in R"
+author: "Steve Pederson, University of Adelaide, Bioinformatics Hub"
+output: html_document
+---
+
+To return to the previous page click [here](https://uofabioinformaticshub.github.io/schoolOfMedicine2016/) or use the back button on your browser.
+
+## Vectors
+R sees everything as a _vector_. 
+These are like columns in a spreadsheet, where we have entries in multiple cells.
+Importantly, _every entry must be of the same data type_!
+
+**Enter the following in the `Script Window` then send it to the `Console`**
+
+_Here we'll use one of the most common R functions_ `c()` _to combine these numbers into a vector_
+
+```{r}
+lifeSpans <- c(2.1, 1.9, 1.7, 1.8, 2.3, 2.5)
+```
+
+This is a _numeric_ vector, where all entries are double precision entries (i.e. they have decimal points).  
+
+Note that this appears differently in the `Environment Tab` to the initial object `x`.
+
+Now we can see details on _how many values_ are in the vector, and _what type_ of values they are.
+
+**What would happen if we accidentally included the letter "a" in this vector?**
+
+- *R* would convert all the numbers to characters, and we would have to convert them back to numbers before proceeding any further.
+
+## Functions
+
+We can perform simple operations on a vector by using some in-built functions.
+Functions in R, consist of their name, followed by the round braces `()`.
+We then pass an *R* object to the function, by including it inside these braces.
+
+```{r, eval=FALSE}
+mean(lifeSpans)
+```
+
+Note that we haven't made a new *R* object.
+We'll do that in a few minutes.
+
+**Try some other functions**  
+Some examples may be `sd()`, `var()`, `max()`, `min()`, `median()`, `summary()`
+
+```{r, eval=FALSE}
+sd(lifeSpans)
+max(lifeSpans)
+summary(lifeSpans)
+```
+
+We can also perform `logical` tests on an entire vector
+
+```{r, eval=FALSE}
+lifeSpans > 2
+```
+
+**Could we apply these functions to integer vectors?**  
+
+**What about character vectors?**
+
+Try some if you'd like.
+```{r, eval=FALSE}
+char_vec<- c("cats", "internet")
+min(char_vec)
+mean(char_vec)
+```
+Try the different functions and see what results they give you.
+You might see confusing error messages, but remember *error messages are your friend*.
+They tell you something isn't right, and (sometimes) give you a clue as to what is wrong, even though they can be frustrating.
+
+In the above, we just printed the results to the screen.
+Sometimes we may want to save the results as a new *R* object.
+For example, every vector also has a length attribute, which is just the number of entries in the vector, and this can be how we find out our sample size.
+```{r}
+sampleSize <- length(lifeSpans)
+sampleSize
+```
+
+## Subsetting Vectors
+
+We can extract single values, or sets of values, from a vector by using square brackets
+
+```{r, eval=FALSE}
+lifeSpans[1]
+lifeSpans[4:6]
+```
+
+## Factors
+
+One other data type we see in R is a _factor_.
+*R* will sometimes assume that any character strings represent categorical variables.
+```{r}
+Groups <- c("treated", "control", "control", "control", "treated", "treated")
+Groups <- factor(Groups)
+Groups
+```
+
+These can be a trap for the unwary, as behind the scenes *R* has saved these as integers, corresponding to which category (_or factor level_) the values belong to.
+
+```{r}
+as.integer(Groups)
+```
+
+In one sense, these are like a hybrid of an integer vector, where the values represent the category number, and a character vector which contains the various category names.
+In the old days of puny computers, this was more memory efficient.
+It also makes sense when you consider statistical modelling is at the heart of R.
+
+[Back](https://uofabioinformaticshub.github.io/schoolOfMedicine2016/)

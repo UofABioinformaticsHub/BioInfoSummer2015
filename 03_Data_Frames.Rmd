@@ -1,0 +1,122 @@
+---
+title: "03 Using Data Frames"
+author: "Steve Pederson, University of Adelaide, Bioinformatics Hub"
+output: html_document
+---
+
+To return to the previous page click [here](https://uofabioinformaticshub.github.io/schoolOfMedicine2016/) or use the back button on your browser.
+
+```{r, echo=FALSE}
+lifeSpans <- c(2.1, 1.9, 1.7, 1.8, 2.3, 2.5)
+Groups <- c("treated", "control", "control", "control", "treated", "treated")
+Groups <- factor(Groups)
+```
+
+
+## Data Frames
+
+An object type called a `data.frame` is probably the most common structure in *R*.
+These are very similar to a spreadsheet in Excel, and have columns with information in them.
+*Each column must be the same length!*
+```{r}
+mouseLife <- data.frame(lifeSpans, Groups)
+mouseLife
+```
+
+Note how R automatically named the columns.
+We could also specify these manually.
+ 
+```{r}
+mouseLife <- data.frame(lifeSpans, Groups,
+                        sex  = c("M", "M", "M", "F", "F", "F"))
+mouseLife
+```
+
+We can easily subset a `data.frame` based on values in a column.
+
+```{r}
+subset(mouseLife, sex =="M")
+```
+
+We can also call a column individually, using the `$` symbol followed by the column name.
+
+```{r}
+mouseLife$Groups
+```
+
+## A Few T-Tests
+
+With our `data.frame` we can conduct some $t$-tests.
+
+### Using all of our data
+
+First we we could test the null hypothesis:
+
+$$
+H_0: \mu = 2  
+$$
+
+with alternative hypothesis
+
+$$
+H_A: \mu \neq 2
+$$
+
+where $\mu$ is the true mean lifespan
+
+**Here we'll need to just call the column of `mouseLife` called `lifeSpans`, which we can perform using the `$` symbol**
+
+```{r, eval=FALSE}
+t.test(mouseLife$lifeSpans, mu = 2)
+```
+
+*Note that we have now given the function `t.test` an extra parameter called `mu`*
+
+If we didn't specify `mu = 2`, the function defaults to `mu = 0`.
+
+### Testing `control` Vs `treated`
+
+To perform this test, we can use the *R* formula syntax, where the symbol `~` can be interpreted as:
+- depends on, or
+- as a function of
+
+```{r, eval=FALSE}
+t.test(lifeSpans~Groups, mouseLife)
+```
+
+### Getting Help
+
+To call the help page on any function, we just preface it with a `?`
+
+```{r, eval=FALSE}
+?t.test
+```
+
+Sometimes *R* help pages can be tricky to understand.
+
+In our code above we have used the second and third versions of the function described on this page.
+*R* has automatically detected which version to call by our placement of either a vector in the first position (`mouseLife$lifeSpans`), or by the placement of a formula (`lifeSpans~Groups`).
+
+- In the first test, we specified the additional argument `mu` by name.
+- In the second test, we specified the object `mouseLife` as our data object by placing it after the formula.
+
+## A basic linear regression
+
+We can also perform linear regression very simply using the function `lm()`.
+
+**Here we'll create a new *R* object with the results from the linear regression where `lifeSpan` is dependent on the `Group` (as with the $t$-test).**
+
+```{r}
+mouseLife_lm <- lm(lifeSpans~Groups, mouseLife)
+```
+
+Now we have the linear model saved, we can find all the important information by passing this object to the functions `anova()` and `summary()`
+
+```{r, eval=FALSE}
+anova(mouseLife_lm)
+summary(mouseLife_lm)
+```
+
+The interpretation of these is beyond to scope of today's session.
+
+[Back](https://uofabioinformaticshub.github.io/schoolOfMedicine2016/)

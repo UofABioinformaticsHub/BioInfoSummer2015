@@ -1,15 +1,16 @@
 ---
-title: "Inspecting Data"
-author: "Steve Pederson & Pengyi Yang"
-date: "7 December 2015"
+title: "05 Inspecting Data"
+author: "Steve Pederson, University of Adelaide, Bioinformatics Hub"
 output: html_document
 ---
+
+To return to the previous page click [here](https://uofabioinformaticshub.github.io/schoolOfMedicine2016/) or use the back button on your browser.
 
 ## Inspecting Data
 
 Once we have our data loaded into R, the first thing we should do is check that it looks right.
 
-The `toothData` file actually contains data about the effects of Vitamin C on tooth growth in Guinea Pigs, using two delivery methods, and three dose levels.
+The `toothData` file actually contains data about the effects of Vitamin C on tooth growth in Guinea Pigs, using *two delivery methods*, and *three dose levels*.
 The main variable of interest is the length of the teeth, contained in the column `len`.
 The delivery was done using two different types of Vitamin C supplements, and these are detailed in the `supp` column.
 The dose levels contained in each supplement are then recorded in the column `dose`, and these represent levels of 0.5, 1 and 2.0mg.
@@ -32,7 +33,7 @@ We can obtain an overall summary of the data using the function `summary()`
 summary(toothData)
 ```
 
-Or we could count the rows.
+Or we could count the rows to find how many samples there were.
 
 ```{r}
 nrow(toothData)
@@ -40,10 +41,10 @@ nrow(toothData)
 
 If you found 60 rows, everything has loaded correctly so we can move on.
 
-
 ## Plotting the data using ggplot2
 
 #### Installing ggplot2
+
 *R* makes visually inspecting the data a relatively straight-forward task, and in particular, the package `ggplot2` has some powerful plotting functions.
 If you don't have this package already installed, you can simply install this using the following command:
 
@@ -138,3 +139,51 @@ ggplot(toothData, aes(x = dose, y = len, fill = supp)) +
 **What did the command **`labs(...)` **do?**
 
 **What effect did the line **`theme_bw()` **have?**
+
+## Exploring the data using `dplyr`
+
+The *R* package `dplyr` makes exploring `data.frame` objects very simple.
+
+```{r, message=FALSE, warning=FALSE}
+library(dplyr)
+```
+
+We could now filter the data instead of using `subset`.
+This behaves like the `Auto Filter` in Excel, so we can chain multiple filters together
+
+```{r, eval=FALSE}
+filter(toothData, dose == "Low")
+filter(toothData, dose == "Low", supp == "VC")
+```
+
+In *R* the syntax for *not equal* is the same as most programming languages.
+
+```{r, eval=FALSE}
+filter(toothData, dose != "Low", supp == "VC")
+```
+
+Again, note that we are not creating any new *R* objects in the above.
+We are just printing the results into the `Console`.
+
+### Grouping Data
+
+The package `dplyr` responds very well to a new *R* trick called the `magrittr` or `pipe` (`%>%`), where we take the output of one process and place it as the input to the next process.
+An alternative way to perform the previous step would be to us the code
+
+```{r, eval=FALSE}
+toothData %>%
+  filter(dose != "Low", supp == "VC")
+```
+
+This becomes extremely powerful when wanting to perform a string of steps on a data object
+
+```{r, eval=FALSE}
+toothData %>%
+  group_by(supp, dose) %>%
+  summarise(mn = mean(len), sd = sd(len), n = n())
+```
+
+This is a very powerful package, which really takes a few hours to explore fully.
+In combination with `ggplot2` you can thoroughly explore very complex datasets.
+
+[Back](https://uofabioinformaticshub.github.io/schoolOfMedicine2016/)
