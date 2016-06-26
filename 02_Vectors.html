@@ -141,6 +141,8 @@ $(document).ready(function () {
 <p>We can perform simple operations on a vector by using some in-built functions. Functions in R, consist of their name, followed by the round braces <code>()</code>. We then pass an <em>R</em> object to the function, by including it inside these braces.</p>
 <pre class="r"><code>mean(lifeSpans)</code></pre>
 <p>Note that we haven’t made a new <em>R</em> object. We’ll do that in a few minutes.</p>
+<p><strong>NB: Tab Auto-Complete is the best</strong></p>
+<p>Instead of typing the complete object name in the above code, we can just start typing the name inside the function <code>mean()</code>, then hitting the <code>Tab</code> key. Try entering <code>mean(life + Tab)</code>, where <code>+ Tab</code> is the tab key. The available options will appear and you can just choose the appropriate one. This can be a huge time-saver!</p>
 <p><strong>Try some other functions</strong><br />Some examples may be <code>sd()</code>, <code>var()</code>, <code>max()</code>, <code>min()</code>, <code>median()</code>, <code>summary()</code></p>
 <pre class="r"><code>sd(lifeSpans)
 max(lifeSpans)
@@ -150,9 +152,9 @@ summary(lifeSpans)</code></pre>
 <p><strong>Could we apply these functions to integer vectors?</strong></p>
 <p><strong>What about character vectors?</strong></p>
 <p>Try some if you’d like.</p>
-<pre class="r"><code>char_vec&lt;- c(&quot;cats&quot;, &quot;internet&quot;)
-min(char_vec)
-mean(char_vec)</code></pre>
+<pre class="r"><code>charVec&lt;- c(&quot;cats&quot;, &quot;internet&quot;)
+min(charVec)
+mean(charVec)</code></pre>
 <p>Try the different functions and see what results they give you. You might see confusing error messages, but remember <em>error messages are your friend</em>. They tell you something isn’t right, and (sometimes) give you a clue as to what is wrong, even though they can be frustrating.</p>
 <p>In the above, we just printed the results to the screen. Sometimes we may want to save the results as a new <em>R</em> object. For example, every vector also has a length attribute, which is just the number of entries in the vector, and this can be how we find out our sample size.</p>
 <pre class="r"><code>sampleSize &lt;- length(lifeSpans)

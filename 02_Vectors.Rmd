@@ -42,6 +42,13 @@ mean(lifeSpans)
 Note that we haven't made a new *R* object.
 We'll do that in a few minutes.
 
+**NB: Tab Auto-Complete is the best**
+
+Instead of typing the complete object name in the above code, we can just start typing the name inside the function `mean()`, then hitting the `Tab` key.
+Try entering `mean(life + Tab)`, where `+ Tab` is the tab key.
+The available options will appear and you can just choose the appropriate one.
+This can be a huge time-saver!
+
 **Try some other functions**  
 Some examples may be `sd()`, `var()`, `max()`, `min()`, `median()`, `summary()`
 
@@ -63,9 +70,9 @@ lifeSpans > 2
 
 Try some if you'd like.
 ```{r, eval=FALSE}
-char_vec<- c("cats", "internet")
-min(char_vec)
-mean(char_vec)
+charVec<- c("cats", "internet")
+min(charVec)
+mean(charVec)
 ```
 Try the different functions and see what results they give you.
 You might see confusing error messages, but remember *error messages are your friend*.
