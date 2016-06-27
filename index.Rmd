@@ -48,3 +48,7 @@ https://github.com/UofABioinformaticsHub/schoolOfMedicine2016/archive/gh-pages.z
 
 ### Optional Material
 [05 Inspecting Data](05_Inspecting_Data.html)
+
+### Other Resources
+[Learn R Using Swirl](http://swirlstats.com/)  
+[RAdelaide 2016](http://www.adelaide.edu.au/bioinformatics-hub/workshops/r-adelaide-2016/)
